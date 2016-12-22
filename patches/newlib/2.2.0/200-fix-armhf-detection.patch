@@ -1,0 +1,27 @@
+# Fix wildcard matching for ARM hardware floats
+# Based on solution found at this issue:
+# https://github.com/crosstool-ng/crosstool-ng/issues/206
+--- newlib-2.2.0/libgloss/arm/configure.in.old	2016-09-28 00:27:47.750176283 -0400
++++ newlib-2.2.0/libgloss/arm/configure.in	2016-09-28 00:27:54.846176075 -0400
+@@ -49,7 +49,7 @@
+ LIB_AM_PROG_AS
+ 
+ case "${target}" in
+-  *-*-elf | *-*-eabi | *-*-tirtos*)
++  *-*-elf | *-*-eabi* | *-*-tirtos*)
+ 	objtype=elf-
+ 	;;
+   *-*-coff)
+
+--- newlib-2.2.0/libgloss/arm/configure.old	2016-09-28 01:06:51.238107763 -0400
++++ newlib-2.2.0/libgloss/arm/configure	2016-09-28 01:06:58.034107565 -0400
+@@ -2531,7 +2531,7 @@
+ 
+ 
+ case "${target}" in
+-  *-*-elf | *-*-eabi | *-*-tirtos*)
++  *-*-elf | *-*-eabi* | *-*-tirtos*)
+ 	objtype=elf-
+ 	;;
+   *-*-coff)
+
